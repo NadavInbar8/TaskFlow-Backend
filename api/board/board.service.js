@@ -10,7 +10,7 @@ async function query() {
     const collection = await dbService.getCollection('board');
     // console.log('collection', collection);
     var boards = await collection.find(criteria).toArray();
-    console.log(boards);
+    // console.log(boards);
 
     return boards;
   } catch (err) {
@@ -23,7 +23,7 @@ async function getById(boardId) {
   try {
     const collection = await dbService.getCollection('board');
     const board = collection.findOne({ _id: ObjectId(boardId) });
-    console.log(board);
+    // console.log(board);
     return board;
   } catch (err) {
     logger.error(`while finding board ${boardId}`, err);
@@ -47,6 +47,7 @@ async function add(board) {
   try {
     const collection = await dbService.getCollection('board');
     const addedBoard = await collection.insertOne(board);
+
     return addedBoard;
   } catch (err) {
     logger.error('cannot insert board', err);
@@ -62,9 +63,9 @@ async function update(board) {
       { _id: id },
       { $set: { ...board } }
     );
-    console.log('updatedBoard', updatedBoard);
+    // console.log('updatedBoard', updatedBoard);
     board._id = id;
-    console.log('this is the board without id ', board);
+    // console.log('this is the board without id ', board);
     return board;
   } catch (err) {
     logger.error(`cannot update board ${boardId}`, err);

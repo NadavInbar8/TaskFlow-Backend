@@ -7,7 +7,7 @@ async function getBoards(req, res) {
   try {
     var queryParams = req.query;
     const boards = await boardService.query(queryParams);
-    console.log(boards);
+    // console.log(boards);
     res.json(boards);
   } catch (err) {
     logger.error('Failed to get boards', err);
@@ -21,7 +21,7 @@ async function getBoardById(req, res) {
     // console.log(req.params.id);
     const boardId = req.params.id;
     const board = await boardService.getById(boardId);
-    console.log(board);
+    // console.log(board);
     res.json(board);
   } catch (err) {
     logger.error('Failed to get board', err);
@@ -34,6 +34,7 @@ async function addBoard(req, res) {
   console.log('the added board function ');
   try {
     const board = req.body;
+    // console.log(board);
     const addedBoard = await boardService.add(board);
     res.json(addedBoard);
   } catch (err) {
@@ -46,6 +47,7 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     const board = req.body;
+    console.log(board);
     const updatedBoard = await boardService.update(board);
     res.json(updatedBoard);
   } catch (err) {
