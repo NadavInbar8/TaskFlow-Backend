@@ -3,6 +3,8 @@ const logger = require('../../services/logger.service');
 
 async function login(req, res) {
   const { email, password } = req.body;
+  // console.log('email', email);
+  // console.log('password', password);
   try {
     const user = await authService.login(email, password);
     req.session.user = user;
@@ -15,12 +17,13 @@ async function login(req, res) {
 
 async function signup(req, res) {
   try {
-    const { email, fullname, initials, imgUrl, password } = req.body;
+    const { email, fullName, initials, imgUrl, password } = req.body;
+    // console.log(email);
     // Never log passwords
     // logger.debug(fullname + ', ' + username + ', ' + password)
     const account = await authService.signup(
       email,
-      fullname,
+      fullName,
       initials,
       imgUrl,
       password
@@ -30,7 +33,7 @@ async function signup(req, res) {
     );
     const user = await authService.login(
       email,
-      fullname,
+      fullName,
       initials,
       imgUrl,
       password
