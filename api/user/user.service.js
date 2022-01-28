@@ -90,15 +90,15 @@ async function update(user) {
 }
 
 async function add(user) {
+  //   console.log('user after hash', user);
   try {
     // peek only updatable fields!
     const userToAdd = {
       email: user.email,
       fullName: user.fullName,
       initials: user.initials,
+      password: user.newPassword,
       imgUrl: user.imgUrl ? user.imgUrl : '',
-      password: user.password,
-      // score: 100
     };
     const collection = await dbService.getCollection('user');
     await collection.insertOne(userToAdd);

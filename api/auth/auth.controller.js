@@ -16,8 +16,10 @@ async function login(req, res) {
 }
 
 async function signup(req, res) {
+  console.log('user', req.body);
   try {
-    const { email, fullName, initials, imgUrl, password } = req.body;
+    const { email, imgUrl, fullName, initials, password } = req.body;
+    if (!imgUrl) imgUrl = '';
     // console.log(email);
     // Never log passwords
     // logger.debug(fullname + ', ' + username + ', ' + password)
@@ -25,19 +27,14 @@ async function signup(req, res) {
       email,
       fullName,
       initials,
-      imgUrl,
-      password
+      password,
+      imgUrl
     );
     logger.debug(
       `auth.route - new account created: ` + JSON.stringify(account)
     );
-    const user = await authService.login(
-      email,
-      fullName,
-      initials,
-      imgUrl,
-      password
-    );
+    const user = await authService.login(email, password);
+    console.log('user befor send to front ', user);
     req.session.user = user;
     res.json(user);
   } catch (err) {

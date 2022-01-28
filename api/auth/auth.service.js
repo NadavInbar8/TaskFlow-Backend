@@ -14,14 +14,16 @@ async function login(email, password) {
   console.log('user auth service login', user);
   if (!user) return Promise.reject('Invalid username or password');
   //   TODO: un-comment for real login
-  // const match = await bcrypt.compare(password, user.password)
-  // if (!match) return Promise.reject('Invalid username or password')
+  const match = await bcrypt.compare(password, user.password);
+  console.log('match', match);
+  console.log(password, user.password);
+  if (!match) return Promise.reject('Invalid username or password');
   delete user.password;
   user._id = user._id.toString();
   return user;
 }
 
-async function signup(email, fullName, initials, imgUrl, password) {
+async function signup(email, fullName, initials, password, imgUrl) {
   const saltRounds = 10;
 
   logger.debug(
@@ -35,8 +37,8 @@ async function signup(email, fullName, initials, imgUrl, password) {
     email,
     fullName,
     initials,
-    imgUrl,
     newPassword: hash,
+    imgUrl,
   });
 }
 
