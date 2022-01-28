@@ -47,7 +47,7 @@ async function add(board) {
 	try {
 		const collection = await dbService.getCollection('board');
 		await collection.insertOne(board);
-		console.log(board);
+		// console.log(board);
 		return board;
 	} catch (err) {
 		logger.error('cannot insert board', err);
