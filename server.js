@@ -30,6 +30,9 @@ if (process.env.NODE_ENV === 'production') {
   };
   app.use(cors(corsOptions));
 }
+// else{
+//   app.use(express.static('public'));
+// }
 
 const authRoutes = require('./api/auth/auth.routes');
 const userRoutes = require('./api/user/user.routes');
@@ -60,4 +63,11 @@ const logger = require('./services/logger.service');
 const port = process.env.PORT || 3030;
 http.listen(port, () => {
   logger.info('Server is running on port: ' + port);
+});
+
+const port = process.env.PORT || 3000;
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}!`);
 });
