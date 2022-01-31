@@ -56,18 +56,13 @@ connectSockets(http, session);
 // so when requesting http://localhost:3030/index.html/car/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue/react-router to take it from there
 app.get('/**', (req, res) => {
-  res.sendFile(path.join('public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+console.log('hello world');
 
 const logger = require('./services/logger.service');
 const port = process.env.PORT || 3030;
 http.listen(port, () => {
   logger.info('Server is running on port: ' + port);
-});
-
-const port = process.env.PORT || 3000;
-const publicPath = path.join(__dirname, '..', 'public');
-app.use(express.static(publicPath));
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}!`);
 });
