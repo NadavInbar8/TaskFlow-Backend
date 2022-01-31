@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "production ready server",
   "main": "server.js",
+  "engines": {
+    "node": "16.13.2"
+  },
   "scripts": {
     "start": "set NODE_ENV=development&&nodemon server.js",
     "server:dev": "set NODE_ENV=development&&nodemon server.js",
-    "server:prod": "set NODE_ENV=production&&node server.js"
+    "server:prod": "set NODE_ENV=production&&node server.js",
+    "heroku": "node server.js"
   },
   "author": "Me",
   "license": "ISC",
