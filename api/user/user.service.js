@@ -100,6 +100,7 @@ async function add(user) {
       password: user.newPassword,
       imgUrl: user.imgUrl ? user.imgUrl : '',
     };
+    // console.log('user to add', userToAdd);
     const collection = await dbService.getCollection('user');
     await collection.insertOne(userToAdd);
     return userToAdd;

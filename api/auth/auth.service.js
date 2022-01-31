@@ -24,6 +24,7 @@ async function login(email, password) {
 }
 
 async function signup(email, fullName, initials, password, imgUrl) {
+  // console.log('insignup');
   const saltRounds = 10;
 
   logger.debug(

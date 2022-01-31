@@ -14,6 +14,9 @@ function connectSockets(http, session) {
     socket.on('disconnect', (socket) => {
       console.log('Someone disconnected');
     });
+    socket.on('updateCard', (card) => {
+      socket.broadcast.emit('setUpdatedCard', card);
+    });
 
     socket.on('updateBoard', (board) => {
       socket.broadcast.emit('setUpdatedBoard', board);

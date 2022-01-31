@@ -16,11 +16,12 @@ async function login(req, res) {
 }
 
 async function signup(req, res) {
-  console.log('user', req.body);
+  // console.log('user', req.body);
   try {
-    const { email, imgUrl, fullName, initials, password } = req.body;
-    if (!imgUrl) imgUrl = '';
+    const { email, fullName, initials, password } = req.body;
+    let { imgUrl } = req.body;
     // console.log(email);
+    if (!imgUrl) imgUrl = '';
     // Never log passwords
     // logger.debug(fullname + ', ' + username + ', ' + password)
     const account = await authService.signup(
@@ -30,11 +31,12 @@ async function signup(req, res) {
       password,
       imgUrl
     );
+    // console.log('account', account);
     logger.debug(
       `auth.route - new account created: ` + JSON.stringify(account)
     );
     const user = await authService.login(email, password);
-    console.log('user befor send to front ', user);
+    // console.log('user befor send to front ', user);
     req.session.user = user;
     res.json(user);
   } catch (err) {
